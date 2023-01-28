@@ -1,8 +1,7 @@
 
 
-
 from django.contrib import admin
-from .models import State, LGA,Senatorial_district,Federal_Constituent, Ward, User,Category, Blog, Sector, Manifestoe, FederalPoll, StatePoll, Senatorial_districtPoll,Federal_ConstituentPoll, LGAPoll, Result
+from .models import State, LGA,Senatorial_district,Federal_Constituent, Ward, User,Category, Blog, Sector, Manifestoe, Poll, FederalPoll, StatePoll, Senatorial_districtPoll,Federal_ConstituentPoll, LGAPoll, Result
 
 
 admin.site.register(State)
@@ -15,12 +14,13 @@ admin.site.register(Category)
 admin.site.register(Blog)
 admin.site.register(Sector)
 admin.site.register(Manifestoe)
+admin.site.register(Poll)
 
 @admin.register(FederalPoll)
 class FederalPollAdmin(admin.ModelAdmin):
-    list_display = ( "manifestoe", "choice", "vote_date", "has_voted",)
-    list_filter = ("manifestoe__sector", "choice", "vote_date", "has_voted")
-    search_fields = ("manifestoe__sector", "has_voted", "vote_date",)
+    list_display = ( "voter","poll", "choice", "vote_date", "has_voted",)
+    list_filter = ("poll__manifestoe__sector", "choice", "vote_date", "has_voted")
+    search_fields = ("poll__manifestoe__sector", "has_voted", "vote_date",)
     
     
 admin.site.register(StatePoll)
