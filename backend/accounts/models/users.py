@@ -7,6 +7,7 @@ from .states import State
 from .lgas import LGA
 
 from .wards import Ward
+from .locations import PollingLocation
 from .senatorial_districts import Senatorial_district
 from .federal_constituencies import Federal_Constituent
 
@@ -14,8 +15,8 @@ from .federal_constituencies import Federal_Constituent
 class User(User):
     birthdate = DateField()
     gender = CharField(max_length=7, choices=(('male','Male'), ('female', 'Female')))
-    phone_number=IntegerField(default='+234')
-    state = ForeignKey(State, on_delete=CASCADE, related_name='user_state')
+    phone_number=IntegerField()
+    state = ForeignKey(State, on_delete=CASCADE, related_name='user_state', default=1)
     #lga = GroupedForeignKey(LGA, "state")
     #ward = GroupedForeignKey(Ward, "lga")
     senDis= ChainedForeignKey(Senatorial_district,
@@ -49,6 +50,15 @@ class User(User):
         auto_choose=True, 
         sort=True
         )
+    
+    location = ChainedForeignKey(PollingLocation,
+        chained_field="ward",
+        chained_model_field="ward",
+        show_all=False, 
+        auto_choose=True, 
+        sort=True
+        )
+    
         
     
         

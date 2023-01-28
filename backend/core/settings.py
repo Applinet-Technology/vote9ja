@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'knox',
     'accounts',
+    'polls',
 ]
 
 MIDDLEWARE = [
