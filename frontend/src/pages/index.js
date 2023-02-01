@@ -17,15 +17,22 @@ import {BrowserRouter} from "react-router-dom"
 // rootElement 
 //);
 const inter = Inter({ subsets: ['latin'] })
-export default function Home({blogs}) {
+export default function Home({users}) {
   return (
     <div>
-        <h1>Eniblog</h1>
+        <h1>Vote9ja Administration</h1>
         <div>
-            {blogs.map((blog) => (
-                <div><h3>{blog.title}</h3>
-                <p>{blog.body}</p>
-                <span>{blog.username}</span>
+            {users.map((user) => (
+                <div><h3>{user.get_full_name}</h3>
+                <p>Username: {user.username}</p>
+                <p>Email: {user.email}</p>
+                <p>Polling State: {user.get_state}</p>
+                <p>Polling Senatorial District: {user.get_senate}</p>
+                <p>Polling Federal Constituency: {user.get_fedcon}</p>
+                <p>Polling local government: {user.get_lga}</p>
+                <p>Polling State Constituency: {user.get_state_con}</p>
+
+                
                 </div>
             ))}
         </div>
@@ -36,15 +43,15 @@ export default function Home({blogs}) {
 export async function getStaticProps() {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
-  const res = await fetch(process.env.DB_HOST)
-  const blogs = await res.json()
+  const res = await fetch(process.env.ACC_HOST)
+  const users = await res.json()
 
   // By returning { props: { posts } }, the Blog component
   // will receive `posts` as a prop at build time
-  console.log(blogs);
+  console.log(users);
   return {
     props: {
-      blogs,
+      users,
     },
   }
 }

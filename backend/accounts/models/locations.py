@@ -10,13 +10,14 @@ from .states import State
 from .senatorial_districts import Senatorial_district
 from .federal_constituencies import Federal_Constituent
 from .lgas import LGA
+from .state_constituencies import State_Constituent
 from .wards import Ward
 
 
 class PollingLocation(models.Model):
     name = models.CharField(max_length=100, default='location')
     
-    state = models.ForeignKey(State, on_delete=models.CASCADE, related_name='location_ward_lga_state', default=1)
+    state = models.ForeignKey(State, on_delete=models.CASCADE, related_name='location_ward_lga_state')
     
     senDis= ChainedForeignKey(Senatorial_district,
         chained_field="state",
@@ -42,9 +43,18 @@ class PollingLocation(models.Model):
         sort=True
         )
     
-    ward = ChainedForeignKey(Ward,
+    state_con = ChainedForeignKey(State_Constituent,
         chained_field="lga",
         chained_model_field="lga",
+        show_all=False, 
+        auto_choose=True, 
+        sort=True
+        )
+    
+    
+    ward = ChainedForeignKey(Ward,
+        chained_field="state_con",
+        chained_model_field="state_con",
         show_all=False, 
         auto_choose=True, 
         sort=True

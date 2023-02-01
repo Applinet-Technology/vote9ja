@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path, include
 from knox import views as knox_views
@@ -33,7 +34,8 @@ schema_view= get_schema_view(
 urlpatterns = [
     path('', schema_view.with_ui('swagger', cache_timeout=0), name='swagger-schema-ui'),
     path('admin/', admin.site.urls),
-    #path('api/', include('accounts.urls')),
+    path('api/accounts/', include('accounts.urls')),
+    path('api/polls/', include('polls.urls')),
     #path('api/login/', LoginAPI.as_view(), name='login'),
     path('api/logout/', knox_views.LogoutView.as_view(), name='logout'),
     path('api/logoutall/', knox_views.LogoutAllView.as_view(), name='logoutall'),

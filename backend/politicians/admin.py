@@ -1,0 +1,15 @@
+from django.contrib import admin
+from .models import *
+admin.site.register(Sector)
+admin.site.register(Manifestoe)
+admin.site.register(Politician)
+admin.site.register(Political_Party)
+admin.site.register(Presidency)
+admin.site.register(Guber)
+admin.site.register(Senate)
+admin.site.register(Fed_Rep)
+admin.site.register(Chairmanship)
+admin.site.register(State_Rep)
+admin.site.register(Councilorship)
+admin.site.register(Presidential_Manifestoe)
+admin.site.register(Gubernatorial_Manifestoe)

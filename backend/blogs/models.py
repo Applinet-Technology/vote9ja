@@ -1,7 +1,9 @@
+from django.db import models
+
 
 from django.db.models import Model, CharField, ForeignKey, TextField, IntegerField,OneToOneField, DateTimeField, CASCADE
 
-from .users import User
+from accounts.models.users import User
 
 class Category(Model):
     name = CharField('Blog Category', max_length=50, unique=True) 

@@ -1,6 +1,11 @@
 
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.parsers import JSONParser
+from .models import User
+from .serializers import UserSerializer
 
-'''
+
 from django.shortcuts import render 
 
 from django.contrib.auth import authenticate
@@ -9,9 +14,9 @@ from rest_framework import viewsets, generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .serializers import UserSerializer, BlogSerializer
+from .serializers import UserSerializer #BlogSerializer
 
-from .models import User, Blog
+from .models import User
 
 from django.contrib.auth import login
 
@@ -48,11 +53,28 @@ class LoginAPI(APIView):
 
 
 
-class UserViewset(viewsets.ModelViewSet):
-    #permission_classes = ()
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+# class UserViewset(viewsets.ModelViewSet):
+#     #permission_classes = ()
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
     
-class BlogAPI(generics.ListAPIView):
-    queryset = Blog.objects.all()
-    serializer_class=BlogSerializer'''
+# class BlogAPI(generics.ListAPIView):
+#     queryset = Blog.objects.all()
+#     serializer_class=BlogSerializer
+
+@csrf_exempt
+def user_list(request):
+    """
+    List all code snippets, or create a new snippet.
+    """
+    if request.method == 'GET':
+        snippets = User.objects.all()
+        serializer = UserSerializer(snippets, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = UserSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
