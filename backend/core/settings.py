@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'polls',
     'blogs',
     'places',
+    'political_parties',
     
 ]
 

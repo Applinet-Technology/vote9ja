@@ -10,7 +10,7 @@ from .state_constituencies import State_Constituent
 
 from smart_selects.db_fields import ChainedForeignKey
 
-from politicians.models import Politician, Political_Party, Councilorship
+from politicians.models import Politician, PoliticalParty, Councilorship
 
 
 class Ward(Model):

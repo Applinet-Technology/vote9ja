@@ -12,13 +12,13 @@ from accounts.models.wards import Ward
 
 from .polls import Poll, CHOICE
 
-from politicians.models import Senate, Senatorial_Manifestoe
+from politicians.models import Senate, Senatorial
 
 
 class Senatorial_districtPoll(models.Model):
     senate = models.ForeignKey(Senate, on_delete=models.CASCADE)
       
-    manifestoe = ChainedForeignKey(Senatorial_Manifestoe,
+    manifestoe = ChainedForeignKey(Senatorial,
         chained_field="senate",
         chained_model_field="senate",
         show_all=False, 

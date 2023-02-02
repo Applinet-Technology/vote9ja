@@ -10,14 +10,14 @@ from accounts.models.senatorial_districts import Senatorial_district
 from accounts.models.federal_constituencies import Federal_Constituent
 from accounts.models.lgas import LGA
 from accounts.models.wards import Ward
-from politicians.models import Guber, Gubernatorial_Manifestoe
+from politicians.models import Guber, Gubernatorial
 
 from .polls import CHOICE
 
 class StatePoll(models.Model):
     guber = models.ForeignKey(Guber, on_delete=models.CASCADE)
       
-    manifestoe = ChainedForeignKey(Gubernatorial_Manifestoe,
+    manifestoe = ChainedForeignKey(Gubernatorial,
         chained_field="guber",
         chained_model_field="guber",
         show_all=False, 
