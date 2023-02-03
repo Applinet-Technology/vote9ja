@@ -10,7 +10,7 @@ from .federal_constituencies import Federal_Constituent
 
 from smart_selects.db_fields import ChainedForeignKey
 
-from politicians.models import Politician, Political_Party, State_Rep
+from politicians.models import Politician, PoliticalParty, State_Rep
 
 from places.niggeo.state_con import NIG_STATE_CONSTITUENCIES
 

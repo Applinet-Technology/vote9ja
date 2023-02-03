@@ -13,14 +13,14 @@ from accounts.models.wards import Ward
 
 from politicians.models import Presidency
 
-from politicians.models import Presidency, Presidential_Manifestoe
+from politicians.models import Presidency, Presidential
 from .polls import Poll, CHOICE
 
 
 class FGPoll(models.Model):
     presidency= models.ForeignKey(Presidency, on_delete=models.CASCADE, related_name = 'federal_presidency')
         
-    manifestoe = ChainedForeignKey(Presidential_Manifestoe,
+    manifestoe = ChainedForeignKey(Presidential,
         chained_field="presidency",
         chained_model_field="presidency",
         show_all=False, 

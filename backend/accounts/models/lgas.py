@@ -5,7 +5,7 @@ from .senatorial_districts import Senatorial_district
 from .federal_constituencies import Federal_Constituent
 from smart_selects.db_fields import ChainedForeignKey
 
-from politicians.models import Politician, Political_Party, Chairmanship
+from politicians.models import Politician, PoliticalParty, Chairmanship
 from places.models import NIG_LGAS
 
 class LGA(Model):

@@ -6,7 +6,7 @@ from .senatorial_districts import Senatorial_district
 from .states import State
 from smart_selects.db_fields import ChainedForeignKey
 
-from politicians.models import Politician, Political_Party, Fed_Rep
+from politicians.models import Politician, PoliticalParty, Fed_Rep
 
 from places.niggeo.fed_con import NIG_FEDERAL_CONSTITUENCIES
 
