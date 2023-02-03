@@ -75,12 +75,12 @@ class Presidency(models.Model):
     party = models.ForeignKey(PoliticalParty, on_delete=models.CASCADE, related_name = 'presidency_party')
     
     def __str__(self):
-        return f'{self.president.presidency} (President) {self.vice_president.presidency} ({self.party.name})'
+        return f'{self.president.presidency} (President) {self.vice_president.presidency} ({self.party.get_name_display()})'
         
 
 
 class Presidential(models.Model):
-    presidency = models.OneToOneField(Presidency, on_delete=models.CASCADE)
+    presidency = models.ForeignKey(Presidency, on_delete=models.CASCADE)
     manifestoe = models.ForeignKey(CandidateManifestoeDetail,on_delete=models.CASCADE, related_name='presidential_manifestoe_poll')
     
     def __str__(self):
@@ -93,7 +93,7 @@ class Guber(models.Model):
     party = models.ForeignKey(PoliticalParty, on_delete=models.CASCADE, related_name = 'guber_party')
     
     def __str__(self):
-        return f'{self.governor.guber} (Governor) {self.deputy_governor.guber} ({self.ruling_party.name})'
+        return f'{self.governor.guber} (Governor) {self.deputy_governor.guber} ({self.party.get_name_display()})'
         
 class Gubernatorial(models.Model):
     guber = models.ForeignKey(Guber, on_delete=models.CASCADE)
@@ -108,7 +108,7 @@ class Senate(models.Model):
     party = models.ForeignKey(PoliticalParty, on_delete=models.CASCADE, related_name = 'senator_pol_party')
     
     def __str__(self):
-        return f'{self.senator.senate} (Senator) ({self.party.name})'
+        return f'{self.senator.senate} (Senator) ({self.party.get_name_display()})'
         
 class Senatorial(models.Model):
     senate = models.ForeignKey(Senate, on_delete=models.CASCADE)
@@ -171,7 +171,7 @@ class Councilorship(models.Model):
     party = models.ForeignKey(PoliticalParty, on_delete=models.CASCADE, related_name = 'councilor_pol_party')
     
     def __str__(self):
-        return f'{self.councilor.councilorship} (Ward Councilorship) ({self.party.name})'
+        return f'{self.councilor.councilorship} (Ward Councilorship) ({self.party.get_name_display()})'
 
 class WardCouncilorship(models.Model):
     councilorship = models.ForeignKey(Councilorship, on_delete=models.CASCADE)

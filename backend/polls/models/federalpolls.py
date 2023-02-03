@@ -38,7 +38,7 @@ class FGPoll(models.Model):
 class FGVote(models.Model):
     voter= models.ForeignKey(User, on_delete=models.CASCADE, related_name='federal_voter')
     poll = models.ForeignKey(FGPoll, on_delete=models.CASCADE, related_name='federal_poll')
-    choice = models.CharField(max_length=10, choices=CHOICE)
+    rating = models.CharField(max_length=10, choices=CHOICE)
     vote_date = models.DateTimeField(auto_now_add=True)
     has_voted = models.BooleanField(default=True)
     @property
@@ -58,4 +58,4 @@ class FGVote(models.Model):
             
     
     def __str__(self):
-        return f'{self.poll.manifestoe.manifestoe.manifestoe_title} performance poll on {self.vote_date}'
+        return f'{self.poll.manifestoe.manifestoe.manifestoe} performance poll on {self.vote_date}'

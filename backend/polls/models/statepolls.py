@@ -30,7 +30,7 @@ class StatePoll(models.Model):
 
     is_active = models.BooleanField(default=True)
     def __str__(self):
-        return self.manifestoe.manifestoe.manifestoe_title
+        return self.manifestoe.manifestoe.manifestoe.manifestoe
 
 class StateVote(models.Model):
     voter= models.ForeignKey(User, on_delete=models.CASCADE, related_name='state_voter')
@@ -42,7 +42,7 @@ class StateVote(models.Model):
         sort=True
         )
     poll = models.ForeignKey(StatePoll, on_delete=models.CASCADE, related_name='state_poll')
-    choice = models.CharField(max_length=10, choices=CHOICE)
+    rating = models.CharField(max_length=10, choices=CHOICE)
     vote_date = models.DateTimeField(auto_now=True)
     has_voted = models.BooleanField(default=True)
     
@@ -55,4 +55,4 @@ class StateVote(models.Model):
     #     super().save(self, *args, **kwargs)
     
     def __str__(self):
-        return f'{self.poll.manifestoe.manifestoe.manifestoe_title} {self.state} State performance poll on {self.vote_date}'
+        return f'{self.poll.manifestoe.manifestoe.manifestoe} {self.state} State performance poll on {self.vote_date}'
