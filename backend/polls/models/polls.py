@@ -12,8 +12,15 @@ from accounts.models.lgas import LGA
 from accounts.models.wards import Ward
 
 
-CHOICE = (('yes','Yes'),('no','No'))
-
+CHOICE = (
+    ('0','0'),
+    ('1','1'),
+    ('2','2'),
+    ('3','3'),
+    ('4','4'),
+    ('5','5'),
+    )
+#print(int(CHOICE[5][0]) + 10)
 class Poll(models.Model):
     text = models.CharField(max_length=150)
     activation_date = models.DateTimeField(auto_now=True)
