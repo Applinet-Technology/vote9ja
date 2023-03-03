@@ -10,15 +10,30 @@ from accounts.models.senatorial_districts import Senatorial_district
 from accounts.models.federal_constituencies import Federal_Constituent
 from accounts.models.lgas import LGA
 from accounts.models.wards import Ward
-from politicians.models import Guber, Gubernatorial
+from politicians.models import GuberParty, Guber, Gubernatorial
 
 from .polls import CHOICE
 
 class StatePoll(models.Model):
-    guber = models.ForeignKey(Guber, on_delete=models.CASCADE)
-      
+    state = models.ForeignKey(State, on_delete=models.CASCADE, related_name = 'state_guber_governor_mandetailks')
+    
+    # guber= ChainedForeignKey(Guber,
+    #     chained_field="state",
+    #     chained_model_field="state",
+    #     show_all=False, 
+    #     auto_choose=True, 
+    #     sort=True,
+    #     )
+    # guber = models.ForeignKey(Guber, on_delete=models.CASCADE)
+    party = ChainedForeignKey(GuberParty,
+        chained_field="state",
+        chained_model_field="state",
+        show_all=False, 
+        auto_choose=True, 
+        sort=True
+        )
     manifestoe = ChainedForeignKey(Gubernatorial,
-        chained_field="guber",
+        chained_field="state",
         chained_model_field="guber",
         show_all=False, 
         auto_choose=True, 
@@ -29,8 +44,9 @@ class StatePoll(models.Model):
     expiry_date = models.DateTimeField()
 
     is_active = models.BooleanField(default=True)
+    
     def __str__(self):
-        return self.manifestoe.manifestoe.manifestoe.manifestoe
+        return f'{self.manifestoe.manifestoe.manifestoe} ({self.text})'
 
 class StateVote(models.Model):
     voter= models.ForeignKey(User, on_delete=models.CASCADE, related_name='state_voter')
@@ -41,6 +57,21 @@ class StateVote(models.Model):
         auto_choose=True,
         sort=True
         )
+    # guber= ChainedForeignKey(Guber,
+    #     chained_field="state",
+    #     chained_model_field="state",
+    #     show_all=False, 
+    #     auto_choose=True, 
+    #     sort=True,
+    #     )
+    # # guber = models.ForeignKey(Guber, on_delete=models.CASCADE)
+    # party = ChainedForeignKey(GuberParty,
+    #     chained_field="guber",
+    #     chained_model_field="guber",
+    #     show_all=False, 
+    #     auto_choose=True, 
+    #     sort=True
+    #     )
     poll = models.ForeignKey(StatePoll, on_delete=models.CASCADE, related_name='state_poll')
     rating = models.CharField(max_length=10, choices=CHOICE)
     vote_date = models.DateTimeField(auto_now=True)

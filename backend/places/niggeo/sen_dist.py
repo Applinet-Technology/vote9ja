@@ -30,7 +30,7 @@ NIG_SENATORIAL_DISTRICTS= (
     ),
     ('Bauchi',(
         ('13','Bauchi South'),
-        ('14','Abia Central'),
+        ('14','Bauchi Central'),
         ('15','Bauchi North'),
         ),
     ),
@@ -43,7 +43,7 @@ NIG_SENATORIAL_DISTRICTS= (
     ('Benue',(
         ('19','Benue East'),
         ('20','Benue West'),
-        ('21','Abia South'),
+        ('21','Benue South'),
         ),
     ),
     ('Borno',(

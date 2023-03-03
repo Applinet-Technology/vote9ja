@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'blogs',
     'places',
     'political_parties',
+    'judiciary',
     
 ]
 
@@ -76,7 +77,7 @@ CORS_ALLOWED_ORIGINS = [
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'media')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -112,7 +113,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         ),
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+        'rest_framework.permissions.AllowAny',
         )
 }
 

@@ -12,15 +12,37 @@ from accounts.models.wards import Ward
 
 from .polls import Poll, CHOICE
 
-from politicians.models import Senate, Senatorial
+from politicians.models import SenateParty, Senate, Senatorial
 
 
 class Senatorial_districtPoll(models.Model):
-    senate = models.ForeignKey(Senate, on_delete=models.CASCADE)
+    state= models.ForeignKey(State, on_delete=models.CASCADE, related_name='senatorial_distrsct_senate_candidate')
+    senDis= ChainedForeignKey(Senatorial_district,
+        chained_field="state",
+        chained_model_field="state",
+        show_all=False, 
+        auto_choose=True, 
+        sort=True,
+        )
+    senate= ChainedForeignKey(Senate,
+        chained_field="senDis",
+        chained_model_field="senDis",
+        show_all=False, 
+        auto_choose=True, 
+        sort=True,
+        )
+    # senate = models.ForeignKey(Senate, on_delete=models.CASCADE)
+    party= ChainedForeignKey(SenateParty,
+        chained_field="senDis",
+        chained_model_field="senDis",
+        show_all=False, 
+        auto_choose=True, 
+        sort=True,
+        )
       
     manifestoe = ChainedForeignKey(Senatorial,
-        chained_field="senate",
-        chained_model_field="senate",
+        chained_field="senDis",
+        chained_model_field="senDis",
         show_all=False, 
         auto_choose=True, 
         sort=True
@@ -30,20 +52,52 @@ class Senatorial_districtPoll(models.Model):
     expiry_date = models.DateTimeField()
         
     is_active = models.BooleanField(default=True)
+    def __str__(self):
+        return f'Senatorial District Senator Manifestoe ({self.manifestoe.manifestoe.manifestoe}) {self.text}' 
+    
 
 class Senatorial_districtVote(models.Model):
     voter= models.ForeignKey(User, on_delete=models.CASCADE, related_name='senatorial_district_voter')
-    
-    senatorial_district= ChainedForeignKey(Senatorial_district,
+
+    state= ChainedForeignKey(State,
         chained_field="voter",
-        chained_model_field="user",
+        chained_model_field="user_state",
         show_all=False, 
         auto_choose=True, 
         sort=True,
         )
-    
-    poll = models.ForeignKey(Senatorial_districtPoll, on_delete=models.CASCADE, related_name='senatorial_district_poll', default=1)
-    choice = models.CharField(max_length=10, choices=CHOICE)
+    # state= models.ForeignKey(State, on_delete=models.CASCADE, related_name='senatorial_distrsct_senate_candidate')
+    senDis= ChainedForeignKey(Senatorial_district,
+        chained_field="state",
+        chained_model_field="state",
+        show_all=False, 
+        auto_choose=True, 
+        sort=True,
+        )
+    # senate= ChainedForeignKey(Senate,
+    #     chained_field="senDis",
+    #     chained_model_field="senDis",
+    #     show_all=False, 
+    #     auto_choose=True, 
+    #     sort=True,
+    #     )
+    # senate = models.ForeignKey(Senate, on_delete=models.CASCADE)
+    # party= ChainedForeignKey(SenateParty,
+    #     chained_field="senate",
+    #     chained_model_field="senate",
+    #     show_all=False, 
+    #     auto_choose=True, 
+    #     sort=True,
+    #     )
+    poll= ChainedForeignKey(Senatorial_districtPoll,
+        chained_field="senDis",
+        chained_model_field="senDis",
+        show_all=False, 
+        auto_choose=True, 
+        sort=True,
+        )
+    # poll = models.ForeignKey(Senatorial_districtPoll, on_delete=models.CASCADE, related_name='senatorial_district_poll', default=1)
+    rating = models.CharField(max_length=10, choices=CHOICE)
     vote_date = models.DateTimeField(auto_now=True)
     has_voted = models.BooleanField(default=True)
     
@@ -56,5 +110,5 @@ class Senatorial_districtVote(models.Model):
     #     super().save(self, *args, **kwargs)
     
     def __str__(self):
-        return f'{self.poll.manifestoe.manifestoe.manifestoe_title} {self.senatorial_district}'
+        return f'{self.poll.manifestoe.manifestoe.manifestoe} performance poll on {self.vote_date}'
         

@@ -100,6 +100,36 @@ NIG_STATE_CONSTITUENCIES= (
         ('86','Surulere II'),
         ),
     ),
+    # Kebbi
+    ('Kogi',(
+        ('87', 'Adavi'),
+        ('88','Ajaokuta'),
+        ('89','Ankpa I'),
+        ('90','Ankpa II'),
+        ('91','Bassa'),
+        ('92','Dekina/Biraidu'),
+        ('93','Okura'),
+        ('94','Ibaji'),
+        ('95','Idah'),
+        ('96','Igalamela-Odolu'),
+        ('97','Ijumu'),
+        ('98','Kabba/Bunu'),
+        ('99','Kogi(K.K)'),
+        ('100','Lokoja I'),
+        ('101','Lokoja II'),
+        ('102','Mopamuro'),
+        ('103','Ofu'),
+        ('104','Ogori/Magonro'),
+        ('105','Okehi'),
+        ('106','Okene Town'),
+        ('107','Okene II (South)'),
+        ('108','Olamaboro'),
+        ('109','Omala'),
+        ('110','Yagba East'),
+        ('111','Yagba West'),
+        ),
+    ),
+    
 )
     
  

@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from knox import views as knox_views
-#from accounts.views import LoginAPI
+from accounts.views import LoginAPI
 from django.conf import settings
 from django.conf.urls.static import static
 from drf_yasg import openapi
@@ -36,7 +36,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/accounts/', include('accounts.urls')),
     path('api/polls/', include('polls.urls')),
-    #path('api/login/', LoginAPI.as_view(), name='login'),
+    path('accounts/login', LoginAPI.as_view(), name='login'),
     path('api/logout/', knox_views.LogoutView.as_view(), name='logout'),
     path('api/logoutall/', knox_views.LogoutAllView.as_view(), name='logoutall'),
     path('chaining/', include('smart_selects.urls')),

@@ -46,5 +46,5 @@ class Poll(models.Model):
     #     super().save(self, *args, **kwargs, force_insert=False)
     
     def __str__(self):
-        return f'{self.manifestoe.manifestoe}'
+        return f'{self.text}'
         

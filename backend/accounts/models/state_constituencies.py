@@ -10,13 +10,13 @@ from .federal_constituencies import Federal_Constituent
 
 from smart_selects.db_fields import ChainedForeignKey
 
-from politicians.models import Politician, PoliticalParty, State_Rep
+# from politicians.models import Politician, PoliticalParty, State_Rep
 
 from places.niggeo.state_con import NIG_STATE_CONSTITUENCIES
 
 class State_Constituent(Model):
     name = CharField(max_length=50, choices = NIG_STATE_CONSTITUENCIES, default='state constituency')
-    state_reps = models.ForeignKey(State_Rep, on_delete=models.CASCADE, related_name = 'state_representative')
+    # state_reps = models.ForeignKey(State_Rep, on_delete=models.CASCADE, related_name = 'state_representative')
     state = ForeignKey(State, on_delete=CASCADE, related_name='con_ward_lga_state')
     
     senDis= ChainedForeignKey(Senatorial_district,

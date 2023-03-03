@@ -10,12 +10,12 @@ from .state_constituencies import State_Constituent
 
 from smart_selects.db_fields import ChainedForeignKey
 
-from politicians.models import Politician, PoliticalParty, Councilorship
+# from politicians.models import Politician, PoliticalParty, Councilorship
 
 
 class Ward(Model):
-    name = CharField(max_length=20, default='ward')
-    councilorship = models.ForeignKey(Councilorship, on_delete=models.CASCADE, related_name = 'councilorship')
+    name = CharField(max_length=50, default='ward')
+    # councilorship = models.ForeignKey(Councilorship, on_delete=models.CASCADE, related_name = 'councilorship')
     state = ForeignKey(State, on_delete=CASCADE, related_name='ward_lga_state')
     senDis= ChainedForeignKey(Senatorial_district,
         chained_field="state",
